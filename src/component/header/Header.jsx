@@ -1,4 +1,4 @@
-import { Search } from "@mui/icons-material";
+import { Search, ShoppingBasket } from "@mui/icons-material";
 import React from "react";
 import "./header.css";
 
@@ -12,7 +12,7 @@ export const Header = () => {
       />
       <div className="header_search">
         <input type="text" className="header_searchInput" />
-        <Search className="header_searchIcon"/>
+        <Search className="header_searchIcon" />
       </div>
 
       <div className="header_nav">
@@ -27,6 +27,10 @@ export const Header = () => {
         <div className="header_option">
           <span className="header_optionLineOne">Your</span>
           <span className="header_optionLineTwo">Prime</span>
+        </div>
+        <div className="header_optionBasket">
+          <ShoppingBasket />
+          <span className="header_optionLineTwo header_basketCount">0</span>
         </div>
       </div>
     </div>
