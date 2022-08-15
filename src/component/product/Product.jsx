@@ -16,6 +16,7 @@ export const Product = () => {
             <p>🌟</p>
         </div>
         <img src="https://images-na.ssl-images-amazon.com/images/I/51Zymog?UnL._AC_SY400_.jpg" alt="p_img" />
+        <button>Add to Basket</button>
       </div>
     </div>
   );
