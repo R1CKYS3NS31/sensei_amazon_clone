@@ -1,3 +1,4 @@
+import { Search } from "@mui/icons-material";
 import React from "react";
 import "./header.css";
 
@@ -11,7 +12,7 @@ export const Header = () => {
       />
       <div className="header_search">
         <input type="text" className="header_searchInput" />
-        {/* logo */}
+        <Search className="header_searchIcon"/>
       </div>
 
       <div className="header_nav">
