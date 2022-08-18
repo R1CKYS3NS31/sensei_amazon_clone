@@ -16,14 +16,13 @@ export const Subtotal = () => {
               This order contains a gift
             </small>
           </>
-  )}
+        )}
         decimalScale={2}
         value={0}
         displayType={"text"}
         thousandSeparator={true}
         prefix={"Ksh. "}
       />
-      
     </div>
   );
 };
