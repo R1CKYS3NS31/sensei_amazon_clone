@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useReducer} from "react";
+import reducer, { initialState } from "../../utils/reducer";
 import { useStateValue } from "../../utils/StateProvider";
 import "./product.css";
 
 export const Product = ({ id, title, image, price, rating }) => {
-  const [state, dispatch] = useStateValue();
+//   const [{basket}, dispatch] = useStateValue();
+  const[basket, dispatch ]= useReducer(reducer,initialState)   
 
+  console.log(basket);
+  
   const addToBasket = () => {
     // dispatch item into basket
+
     dispatch({
       type: "ADD_TO_BASKET",
       item: {
