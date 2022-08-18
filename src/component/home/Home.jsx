@@ -13,6 +13,7 @@ export const Home = () => {
         />
         <div className="home_row">
           <Product />
+          <Product />
           {/* product */}
         </div>
         <div className="home_row">
