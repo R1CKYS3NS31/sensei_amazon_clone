@@ -13,6 +13,7 @@ export const Home = () => {
         />
         <div className="home_row">
           <Product
+            id={1}
             title={"The learn startup"}
             price={19.99}
             image={
@@ -20,7 +21,8 @@ export const Home = () => {
             }
             rating={4}
           />
-            <Product
+          <Product
+            id={2}
             title={"The learn startup"}
             price={19.99}
             image={
@@ -31,7 +33,8 @@ export const Home = () => {
           {/* product */}
         </div>
         <div className="home_row">
-        <Product
+          <Product
+            id={3}
             title={"The learn startup"}
             price={19.99}
             image={
@@ -39,7 +42,8 @@ export const Home = () => {
             }
             rating={4}
           />
-            <Product
+          <Product
+            id={4}
             title={"The learn startup"}
             price={19.99}
             image={
@@ -47,7 +51,8 @@ export const Home = () => {
             }
             rating={4}
           />
-            <Product
+          <Product
+            id={5}
             title={"The learn startup"}
             price={19.99}
             image={
@@ -59,7 +64,8 @@ export const Home = () => {
           {/* product */}
         </div>
         <div className="home_row">
-        <Product
+          <Product
+            id={6}
             title={"The learn startup"}
             price={34.99}
             image={
@@ -67,7 +73,7 @@ export const Home = () => {
             }
             rating={4}
           />
-          
+
           {/* product */}
           {/* product */}
         </div>

@@ -6,6 +6,9 @@ import "./header.css";
 
 export const Header = () => {
   const [{ basket }, dispatch] = useStateValue();
+  
+  console.log(basket);
+
   return (
     <div className="header">
       <Link to={"/"}>
