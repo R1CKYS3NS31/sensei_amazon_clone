@@ -32,7 +32,7 @@ export const Header = () => {
           <span className="header_optionLineOne">Your</span>
           <span className="header_optionLineTwo">Prime</span>
         </div>
-        <Link to={'/chekout'}>
+        <Link to={'/checkout'}>
           <div className="header_optionBasket">
           <ShoppingBasket />
           <span className="header_optionLineTwo header_basketCount">0</span>
