@@ -13,6 +13,7 @@ export const Checkout = () => {
         />
         <div className="">
           <h2 className="checkout_title">Your SHopping Basket</h2>
+          {/* checkout product */}
         </div>
       </div>
       <div className="checkout_right">

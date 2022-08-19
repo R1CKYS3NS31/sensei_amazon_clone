@@ -5,8 +5,7 @@ import { useStateValue } from "../../../utils/StateProvider";
 import "./subtotal.css";
 
 export const Subtotal = () => {
-
-  const [{basket}, dispatch] = useStateValue()
+  const [{ basket }, dispatch] = useStateValue();
 
   return (
     <div className="subtotal">
