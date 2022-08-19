@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./login.css";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../utils/firebase";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +11,11 @@ export const Login = () => {
 
   const signIn = (e) => {
     e.preventDefault()
-
+    createUserWithEmailAndPassword(auth,email,password).then((userCredential)=>{
+        // signed in
+        const user = userCredential.user
+        console.log(user);
+    })
     // firebase login
   };
 
