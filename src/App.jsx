@@ -4,10 +4,30 @@ import { Home } from "./component/home/Home";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Checkout } from "./component/checkout/Checkout";
 import { Login } from "./component/login/Login";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./utils/firebase";
+import { useEffect } from "react";
 
 
 
 function App() {
+
+useEffect(() => {
+  // run when App compenent loads
+  onAuthStateChanged(auth,(user)=>{
+    if (user) {
+      // User is signed in
+      const uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  
+  })
+ 
+}, [])
+
   return (
     <Router>
       <div className="app">
