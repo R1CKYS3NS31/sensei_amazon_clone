@@ -33,7 +33,9 @@ export const Header = () => {
         {/* login */}
         <Link to={!user && "/login"}>
           <div className="header_option" onClick={handleAuth}>
-            <span className="header_optionLineOne">Hello Guest</span>
+            <span className="header_optionLineOne">
+              {user ? user.email : "Hello Guest"}
+            </span>
             <span className="header_optionLineTwo">
               {user ? "Sign Out" : "Sign In"}
             </span>
