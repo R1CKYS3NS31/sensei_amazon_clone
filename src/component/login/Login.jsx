@@ -10,18 +10,24 @@ export const Login = () => {
   const [password, setPassword] = useState("");
 
   const signIn = (e) => {
-    e.preventDefault()
-    createUserWithEmailAndPassword(auth,email,password).then((userCredential)=>{
-        // signed in
-        const user = userCredential.user
-        console.log(user);
-    })
+    e.preventDefault();
+
     // firebase login
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // signed in
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   };
 
-
   const register = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // firebase register
   };
