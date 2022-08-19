@@ -1,8 +1,24 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./login.css";
 
 export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signIn = (e) => {
+    e.preventDefault()
+
+    // firebase login
+  };
+
+
+  const register = (e) => {
+    e.preventDefault()
+
+    // firebase register
+  };
   return (
     <div className="login">
       <Link to={"/"}>
@@ -17,19 +33,33 @@ export const Login = () => {
 
         <form>
           <h5>E-mail</h5>
-          <input type="text" />
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={"email@gmail.com"}
+          />
 
           <h5>Password</h5>
-          <input type="password" />
+          <input
+            type="password"
+            placeholder="strong password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-          <button className="login_signInButton">Sign-In</button>
+          <button type="submit" className="login_signInButton" onClick={signIn}>
+            Sign-In
+          </button>
         </form>
         <p>
           By signing-In you agree to the AMAZON FAKE CLONE conditions of use &
           sale. Please see our privacy notice, our cookies notice and our
           interest-based ads notice.
         </p>
-        <button className="login_registerButton">Create your Amazon Acount</button>
+        <button className="login_registerButton" onClick={register}>
+          Create your Amazon Acount
+        </button>
       </div>
     </div>
   );
