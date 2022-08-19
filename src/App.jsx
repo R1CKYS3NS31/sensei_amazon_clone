@@ -1,9 +1,11 @@
 import "./App.css";
 import { Header } from "./component/header/Header";
 import { Home } from "./component/home/Home";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Checkout } from "./component/checkout/Checkout";
-import { Link } from "@mui/material";
+import { Login } from "./component/login/Login";
+
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
         <Routes>
           <Route path={"/"} exact element={<Home />}></Route>
           <Route path={"/checkout"} element={<Checkout />}></Route>
+          <Route path="/login" element={<Login/>}></Route>
 
           {/* unknown route */}
           <Route
