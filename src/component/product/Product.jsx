@@ -4,7 +4,8 @@ import "./product.css";
 
 export const Product = ({ id, title, image, price, rating }) => {
   const [{basket}, dispatch] = useStateValue(); 
-  
+  console.log('my basket',basket);
+
   const addToBasket = () => {
     // dispatch item into basket
 

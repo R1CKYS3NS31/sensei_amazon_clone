@@ -2,14 +2,13 @@ export const initialState = {
   basket: [],
 };
 
-const reducer = (state, action) => {
-    
-  switch (action.type) {
-    case "Add_TO_BASKET":
-      return { ...state, basket: [...state.basket, action.item] };
+export default (state = initialState, { type, payload }) => {
+  switch (type) {
 
-    default:
-      return state;
+  case 'ADD_TO_BASKET':
+    return { ...state, ...payload }
+
+  default:
+    return state
   }
-};
-export default reducer;
+}
