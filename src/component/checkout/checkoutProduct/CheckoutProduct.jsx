@@ -2,6 +2,11 @@ import React from "react";
 import "./checkoutProduct.css";
 
 export const CheckoutProduct = ({ id, image, title, price, rating }) => {
+
+  const removeFromBasket=()=>{
+    //remove item from basket
+  }
+
   return (
     <div className="checkoutProduct">
       <img src={image} alt="" className="checkoutProduct_image" />
@@ -16,6 +21,7 @@ export const CheckoutProduct = ({ id, image, title, price, rating }) => {
             <p key={i}>🌟</p>
             ))}
         </div>
+        <button onClick={removeFromBasket}>Remove from Basket</button>
       </div>
     </div>
   );
