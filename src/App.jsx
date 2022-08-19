@@ -7,10 +7,12 @@ import { Login } from "./component/login/Login";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./utils/firebase";
 import { useEffect } from "react";
+import { useStateValue } from "./utils/StateProvider";
 
 
 
 function App() {
+  const [{},dispatch] = useStateValue()
 
 useEffect(() => {
   // run when App compenent loads
@@ -18,9 +20,18 @@ useEffect(() => {
     if (user) {
       // User is signed in
       const uid = user.uid;
+      // console.log('user: '+uid);
+      dispatch({
+        type:'SET_USER',
+        user:user
+      })
       // ...
     } else {
       // User is signed out
+      dispatch({
+        type:'SET_USER',
+        user:null
+      })
       // ...
     }
   
