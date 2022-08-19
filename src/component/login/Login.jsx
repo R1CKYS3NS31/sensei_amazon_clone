@@ -1,11 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, unstable_HistoryRouter } from "react-router-dom";
 import "./login.css";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../utils/firebase";
 
 export const Login = () => {
+  const history = unstable_HistoryRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,15 +18,15 @@ export const Login = () => {
     e.preventDefault();
 
     // firebase login
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // signed in
         const user = userCredential.user;
-        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        alert(errorCode + " - " + errorMessage);
         // ..
       });
   };
@@ -30,7 +35,23 @@ export const Login = () => {
     e.preventDefault();
 
     // firebase register
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // signed in
+        // const user = userCredential.user;
+        // console.log(user);
+        if (userCredential) {
+          history.push("/");
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorCode + " - " + errorMessage);
+        // ..
+      });
   };
+
   return (
     <div className="login">
       <Link to={"/"}>
