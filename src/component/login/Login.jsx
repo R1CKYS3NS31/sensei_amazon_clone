@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link, unstable_HistoryRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import {
   createUserWithEmailAndPassword,
@@ -9,7 +9,7 @@ import {
 import { auth } from "../../utils/firebase";
 
 export const Login = () => {
-  const history = unstable_HistoryRouter();
+    const navigate= useNavigate()
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +21,11 @@ export const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // signed in
-        const user = userCredential.user;
+        // const user = userCredential.user;
+        // console.log(user);
+        if (userCredential) {
+            navigate('/',{replace:true})
+          }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -41,7 +45,7 @@ export const Login = () => {
         // const user = userCredential.user;
         // console.log(user);
         if (userCredential) {
-          history.push("/");
+          navigate('/',{replace:true})
         }
       })
       .catch((error) => {
