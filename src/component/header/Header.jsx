@@ -7,7 +7,7 @@ import "./header.css";
 export const Header = () => {
   const [{ basket }, dispatch] = useStateValue();
   
-  console.log(basket);
+  console.log(basket.length);
 
   return (
     <div className="header">

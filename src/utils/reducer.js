@@ -2,13 +2,13 @@ export const initialState = {
   basket: [],
 };
 
-export default (state = initialState, { type, payload }) => {
-  switch (type) {
+export default (state, action) => {
+  
+  switch (action.type) {
+    case "ADD_TO_BASKET":
+      return { ...state, basket: [...state.basket, action.item] };
 
-  case 'ADD_TO_BASKET':
-    return { ...state, ...payload }
-
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};
