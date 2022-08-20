@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./utils/firebase";
 import { useEffect } from "react";
 import { useStateValue } from "./utils/StateProvider";
+import { Payment } from "./component/payment/Payment";
 
 
 
@@ -47,6 +48,7 @@ useEffect(() => {
           <Route path={"/"} exact element={<Home />}></Route>
           <Route path={"/checkout"} element={<Checkout />}></Route>
           <Route path="/login" element={<Login/>}></Route>
+          <Route path="/payment" element={<Payment/>}></Route>
 
           {/* unknown route */}
           <Route
