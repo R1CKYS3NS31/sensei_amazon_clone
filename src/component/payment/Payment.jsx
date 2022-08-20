@@ -8,7 +8,7 @@ import { useStateValue } from "../../utils/StateProvider";
 import { CheckoutProduct } from "../checkout/checkoutProduct/CheckoutProduct";
 import "./payment.css";
 
-const baseUrl = ''
+const baseUrl = 'http://localhost:5001/sensei-clone/us-central1/api'
 
 export const Payment = () => {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -37,6 +37,8 @@ export const Payment = () => {
     };
     getClientSecret();
   }, [basket]);
+
+  console.log('The client secrete is: ', clientSecret);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
