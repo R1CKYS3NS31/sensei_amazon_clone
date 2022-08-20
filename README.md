@@ -69,4 +69,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # sensei_amazon_clone
+[prevent treating warnings as errors](https://360techexplorer.com/treating-warnings-as-errors-because-process-env-ci-true-vercel-netlify-jenkins-etc/)
 ### Hosted @[sensei-clone.web.app](https://sensei-clone.web.app/)
