@@ -9,36 +9,38 @@ import { auth } from "./utils/firebase";
 import { useEffect } from "react";
 import { useStateValue } from "./utils/StateProvider";
 import { Payment } from "./component/payment/Payment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
-
+const promise = loadStripe(
+  "pk_test_51LYmN6GRVcB5JNrqaOKJMhNBVdnUzszbsILTLffPwqsRIFiEUnHAda7VZBCBPZ9eH5b0YP1F2F02WsZSZPIPp76R00yWppJSAJ"
+);
 
 function App() {
-  const [{},dispatch] = useStateValue()
+  const [{}, dispatch] = useStateValue();
 
-useEffect(() => {
-  // run when App compenent loads
-  onAuthStateChanged(auth,(user)=>{
-    if (user) {
-      // User is signed in
-      const uid = user.uid;
-      // console.log('user: '+uid);
-      dispatch({
-        type:'SET_USER',
-        user:user
-      })
-      // ...
-    } else {
-      // User is signed out
-      dispatch({
-        type:'SET_USER',
-        user:null
-      })
-      // ...
-    }
-  
-  })
- 
-}, [])
+  useEffect(() => {
+    // run when App compenent loads
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        const uid = user.uid;
+        // console.log('user: '+uid);
+        dispatch({
+          type: "SET_USER",
+          user: user,
+        });
+        // ...
+      } else {
+        // User is signed out
+        dispatch({
+          type: "SET_USER",
+          user: null,
+        });
+        // ...
+      }
+    });
+  }, []);
 
   return (
     <Router>
@@ -47,8 +49,15 @@ useEffect(() => {
         <Routes>
           <Route path={"/"} exact element={<Home />}></Route>
           <Route path={"/checkout"} element={<Checkout />}></Route>
-          <Route path="/login" element={<Login/>}></Route>
-          <Route path="/payment" element={<Payment/>}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route
+            path="/payment"
+            element={
+              <Elements stripe={promise}>
+                <Payment />
+              </Elements>
+            }
+          ></Route>
 
           {/* unknown route */}
           <Route
