@@ -1,6 +1,4 @@
-import { async } from "@firebase/util";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,9 +7,9 @@ import { useStateValue } from "../../utils/StateProvider";
 import { CheckoutProduct } from "../checkout/checkoutProduct/CheckoutProduct";
 import "./payment.css";
 
-const baseUrl = "http://localhost:5001/sensei-clone/us-central1/api";
-
 export const Payment = () => {
+  const baseUrl = "http://localhost:5001/sensei-clone/us-central1/api";
+
   const [{ basket, user }, dispatch] = useStateValue();
   const elements = useElements();
   const stripe = useStripe();
@@ -25,23 +23,18 @@ export const Payment = () => {
 
   useEffect(() => {
     const getClientSecret = async () => {
-    //   const response = await fetch(
-    //     // total in a currencies subunits
-    //     // `${baseUrl}/payments/create?total=${getBasketTotal(basket) / 100}`,
-    //     `${baseUrl}/payments/create`,
-    //     {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify(getBasketTotal(basket)), //data
-    //     }
-    //   );
-
-    const response = await axios({
-        method:'post',
-        url:`payments/create?total=${getBasketTotal(basket)}`
-    })
-      console.log(response);
-      setClientSecret(response.data.clientSecret);
+      const response = await fetch(
+        // total in a currencies subunits
+        // `${baseUrl}/payments/create?total=${getBasketTotal(basket) / 100}`,
+        `${baseUrl}/payments/create`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ total: getBasketTotal(basket) }), //data
+        }
+      );
+      const data = await response.json();
+      setClientSecret(data.clientSecret);
     };
     getClientSecret();
   }, [basket]);
@@ -63,6 +56,10 @@ export const Payment = () => {
         setSucceeded(true);
         setError(null);
         setProcessing(false);
+
+        dispatch({
+            type:'EMPTY_BASKET'
+        })
 
         navigate("/orders", { replace: true });
       });

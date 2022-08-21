@@ -15,7 +15,7 @@ export const Home = () => {
           <Product
             id={1}
             title={"The learn startup"}
-            price={19.99}
+            price={19.00}
             image={
               "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._AC_SY400_.jpg"
             }
@@ -24,7 +24,7 @@ export const Home = () => {
           <Product
             id={2}
             title={"The learn startup"}
-            price={19.99}
+            price={100.00}
             image={
               "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._AC_SY400_.jpg"
             }
@@ -36,7 +36,7 @@ export const Home = () => {
           <Product
             id={3}
             title={"The learn startup"}
-            price={19.99}
+            price={178.00}
             image={
               "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._AC_SY400_.jpg"
             }
@@ -45,7 +45,7 @@ export const Home = () => {
           <Product
             id={4}
             title={"The learn startup"}
-            price={19.99}
+            price={19.0}
             image={
               "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._AC_SY400_.jpg"
             }
@@ -54,7 +54,7 @@ export const Home = () => {
           <Product
             id={5}
             title={"The learn startup"}
-            price={19.99}
+            price={67.00}
             image={
               "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._AC_SY400_.jpg"
             }
@@ -67,7 +67,7 @@ export const Home = () => {
           <Product
             id={6}
             title={"The learn startup"}
-            price={34.99}
+            price={34.00}
             image={
               "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._AC_SY400_.jpg"
             }
