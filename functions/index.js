@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 
 const stripe = require("stripe")(
-  "pk_test_51LYmN6GRVcB5JNrqaOKJMhNBVdnUzszbsILTLffPwqsRIFiEUnHAda7VZBCBPZ9eH5b0YP1F2F02WsZSZPIPp76R00yWppJSAJ"
+  "sk_test_51LYmN6GRVcB5JNrqSu0VL2DYm4SoHEYhhvknDbEU284XphbvenlwnEX95AvWKkfhZocw6uggtQi29HKoADte6yVU00ORECr3TM"
 );
 
 // API
@@ -16,18 +16,20 @@ app.use(express.json());
 
 // API - routes
 app.get("/", (req, res) => res.status(200).send("hello sensei"));
-app.get("/payments/create", async(req, res) => {
-  const total = req.query.total
-  
-  console.log('Payments received: ',total);
+app.post("/payments/create", async (req, res) => {
+  // console.log( req.body);
+  //   const { total } = await req.body;
+
+  const total = req.query.total;
+  console.log("Payments received: ", total);
 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount:total,
-    currency:'usd',
-  })
+    amount: total,
+    currency: "usd",
+  });
 
-//   created
-  res.status(201)
+  //   created
+  res.status(201);
 });
 
 // listen command
