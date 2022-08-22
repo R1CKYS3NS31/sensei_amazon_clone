@@ -1,4 +1,5 @@
 import React from "react";
+import { reducerAction } from "../../utils/reducer";
 import { useStateValue } from "../../utils/StateProvider";
 import "./product.css";
 
@@ -10,7 +11,7 @@ export const Product = ({ id, title, image, price, rating }) => {
     // dispatch item into basket
 
     dispatch({
-      type: "ADD_TO_BASKET",
+      type: reducerAction.ADD_TO_BASKET,
       item: {
         id: id,
         title: title,

@@ -1,19 +1,18 @@
 import React from "react";
+import { reducerAction } from "../../../utils/reducer";
 import { useStateValue } from "../../../utils/StateProvider";
 import "./checkoutProduct.css";
 
 export const CheckoutProduct = ({ id, image, title, price, rating }) => {
+  const [{ basket }, dispatch] = useStateValue();
 
-  const [{basket},dispatch]= useStateValue()
-
-  const removeFromBasket=()=>{
+  const removeFromBasket = () => {
     //remove item from basket
     dispatch({
-      type:'REMOVE_FROM_BASKET',
-      id:id
-
-    })
-  }
+      type: reducerAction.REMOVE_FROM_BASKET,
+      id: id,
+    });
+  };
 
   return (
     <div className="checkoutProduct">
@@ -25,8 +24,10 @@ export const CheckoutProduct = ({ id, image, title, price, rating }) => {
           <strong>{price}</strong>
         </p>
         <div className="chekoutProduct_rating">
-            {Array(rating).fill().map((_,i)=>(
-            <p key={i}>🌟</p>
+          {Array(rating)
+            .fill()
+            .map((_, i) => (
+              <p key={i}>🌟</p>
             ))}
         </div>
         <button onClick={removeFromBasket}>Remove from Basket</button>
