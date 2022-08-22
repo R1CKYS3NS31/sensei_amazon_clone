@@ -1,8 +1,10 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { addDoc, collection, doc} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { Link, useNavigate } from "react-router-dom";
-import { getBasketTotal } from "../../utils/reducer";
+import { db } from "../../utils/firebase";
+import { getBasketTotal, reducerAction } from "../../utils/reducer";
 import { useStateValue } from "../../utils/StateProvider";
 import { CheckoutProduct } from "../checkout/checkoutProduct/CheckoutProduct";
 import "./payment.css";
@@ -53,13 +55,28 @@ export const Payment = () => {
       })
       .then(({ paymentIntent }) => {
         // payment confirmation
+
+        try {
+          const userRef = doc(db, "users", user.uid);
+          const orderRef = collection(userRef, "orders", paymentIntent.id);
+          addDoc(orderRef, {
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+
+          // console.log('Doc written with iD:', userRef.id);
+        } catch (e) {
+          console.error(e);
+        }
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);
 
         dispatch({
-            type:'EMPTY_BASKET'
-        })
+          type: reducerAction.EMPTY_BASKET,
+        });
 
         navigate("/orders", { replace: true });
       });
@@ -120,7 +137,10 @@ export const Payment = () => {
                   thousandSeparator={true}
                   prefix={"Ksh. "}
                 />
-                <button disabled={processing || disabled || succeeded}>
+                <button
+                  type="submit"
+                  disabled={processing || disabled || succeeded}
+                >
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>

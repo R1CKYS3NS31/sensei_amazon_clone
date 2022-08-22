@@ -11,6 +11,8 @@ import { useStateValue } from "./utils/StateProvider";
 import { Payment } from "./component/payment/Payment";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import { Orders } from "./component/orders/Orders";
+import { reducerAction } from "./utils/reducer";
 
 const promise = loadStripe(
   "pk_test_51LYmN6GRVcB5JNrqaOKJMhNBVdnUzszbsILTLffPwqsRIFiEUnHAda7VZBCBPZ9eH5b0YP1F2F02WsZSZPIPp76R00yWppJSAJ"
@@ -27,14 +29,14 @@ function App() {
         const uid = user.uid;
         // console.log('user: '+uid);
         dispatch({
-          type: "SET_USER",
+          type: reducerAction.SET_USER,
           user: user,
         });
         // ...
       } else {
         // User is signed out
         dispatch({
-          type: "SET_USER",
+          type: reducerAction.SET_USER,
           user: null,
         });
         // ...
@@ -58,6 +60,7 @@ function App() {
               </Elements>
             }
           ></Route>
+          <Route path="/orders" element={<Orders/>}></Route>
 
           {/* unknown route */}
           <Route

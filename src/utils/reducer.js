@@ -3,15 +3,22 @@ export const initialState = {
   user: null,
 };
 
+export const reducerAction = {
+  ADD_TO_BASKET: "ADD_TO_BASKET",
+  REMOVE_FROM_BASKET: "REMOVE_FROM_BASKET",
+  EMPTY_BASKET: "EMPTY_BASKET",
+  SET_USER: "SET_USER",
+};
+
 export const getBasketTotal = (basket) =>
   basket?.reduce((amount, item) => item.price + amount, 0);
 
 export default (state, action) => {
   switch (action.type) {
-    case "ADD_TO_BASKET":
+    case reducerAction.ADD_TO_BASKET:
       return { ...state, basket: [...state.basket, action.item] };
 
-    case "REMOVE_FROM_BASKET":
+    case reducerAction.REMOVE_FROM_BASKET:
       const index = state.basket.findIndex(
         (basketItem) => basketItem.id === action.id
       );
@@ -25,7 +32,9 @@ export default (state, action) => {
       }
       return { ...state, basket: newBasket };
 
-    case "SET_USER":
+    case reducerAction.EMPTY_BASKET:
+      return { ...state, basket: [] };
+    case reducerAction.SET_USER:
       return {
         ...state,
         user: action.user,
