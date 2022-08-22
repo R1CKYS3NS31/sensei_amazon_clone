@@ -28,7 +28,7 @@
 .payment_details > form {
   min-width: 400px;
 }
-.payment_details > h4 {
+.payment_details > h3 {
   padding-bottom: 20px;
 }
 .payment_details > form > div > button {
