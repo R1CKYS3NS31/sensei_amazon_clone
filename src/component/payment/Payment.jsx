@@ -1,5 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { addDoc, collection, doc} from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { Link, useNavigate } from "react-router-dom";
@@ -36,7 +36,7 @@ export const Payment = () => {
         }
       );
       const data = await response.json();
-      setClientSecret(data.clientSecret);
+      await setClientSecret(data.clientSecret);
     };
     getClientSecret();
   }, [basket]);
@@ -53,17 +53,26 @@ export const Payment = () => {
           card: elements.getElement(CardElement),
         },
       })
-      .then(({ paymentIntent }) => {
+      .then(async (paymentIntent) => {
         // payment confirmation
 
         try {
           const userRef = doc(db, "users", user.uid);
           const orderRef = collection(userRef, "orders", paymentIntent.id);
-          addDoc(orderRef, {
+          await addDoc(orderRef, {
             basket: basket,
             amount: paymentIntent.amount,
             created: paymentIntent.created,
           });
+          // db.collection("users")
+          //   .doc(user.uid)
+          //   .collection("orders")
+          //   .doc(paymentIntent.id)
+          //   .set({
+          //     basket: basket,
+          //     amount: paymentIntent.amount,
+          //     created: paymentIntent.created,
+          //   });
 
           // console.log('Doc written with iD:', userRef.id);
         } catch (e) {
