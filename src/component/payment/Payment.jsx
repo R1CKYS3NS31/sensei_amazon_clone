@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
@@ -8,13 +7,13 @@ import { useStateValue } from "../../utils/StateProvider";
 import { CheckoutProduct } from "../checkout/checkoutProduct/CheckoutProduct";
 import "./payment.css";
 
-const baseUrl = ''
-
 export const Payment = () => {
+  const baseUrl = "http://localhost:5001/sensei-clone/us-central1/api";
+
   const [{ basket, user }, dispatch] = useStateValue();
   const elements = useElements();
   const stripe = useStripe();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
@@ -26,34 +25,44 @@ export const Payment = () => {
     const getClientSecret = async () => {
       const response = await fetch(
         // total in a currencies subunits
-        `${baseUrl}/payments/create?total=${getBasketTotal(basket) * 100}`,
+        // `${baseUrl}/payments/create?total=${getBasketTotal(basket) / 100}`,
+        `${baseUrl}/payments/create`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          //   body: JSON.stringify(getBasketTotal(basket)), //data
+          body: JSON.stringify({ total: getBasketTotal(basket) }), //data
         }
       );
-      setClientSecret(response.data.clientSecret)
+      const data = await response.json();
+      setClientSecret(data.clientSecret);
     };
     getClientSecret();
   }, [basket]);
+
+  console.log("The client secrete is: ", clientSecret);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setProcessing(true);
 
-    const payload = await stripe.confirmCardPayment(clientSecret,{
-        payment_method:{
-            card:elements.getElement(CardElement)
-        }
-    }).then(({paymentIntent})=>{
+    const payload = await stripe
+      .confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      })
+      .then(({ paymentIntent }) => {
         // payment confirmation
-        setSucceeded(true)
-        setError(null)
-        setProcessing(false)
+        setSucceeded(true);
+        setError(null);
+        setProcessing(false);
 
-        navigate('/orders',{replace:true})
-    })
+        dispatch({
+            type:'EMPTY_BASKET'
+        })
+
+        navigate("/orders", { replace: true });
+      });
   };
   const handleChange = (e) => {
     setDisabled(e.empty);
